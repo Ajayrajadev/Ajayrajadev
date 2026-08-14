@@ -1,42 +1,38 @@
-name: 🐍 Generate Advanced Contribution Animations
+name: Generate Advanced Contribution Animations
 
 on:
 schedule:
 - cron: "0 0 * * *"
-
 workflow_dispatch:
-
 push:
 branches:
 - main
 
 jobs:
 generate:
-name: 🐍 Generate Snake Animations
+name: Generate Snake Animations
 runs-on: ubuntu-latest
 timeout-minutes: 10
 
-```
 permissions:
   contents: write
 
 steps:
-  - name: 🐍 Generate contribution animations
+  - name: Generate contribution animations
     uses: Platane/snk@v3
     with:
       github_user_name: Ajayrajadev
       outputs: |
         dist/github-snake.svg?palette=github
         dist/github-snake-dark.svg?palette=github-dark
-        dist/github-snake.gif?color_snake=%2300F7FF&color_dots=%230D1117%23006420%2300A040%2300D26A%2307F7A0
+        dist/github-snake.gif?color_snake=%2300F7FF&color_dots=%230D1117,%23006420,%2300A040,%2300D26A,%2307F7A0
 
-  - name: 🚀 Publish animations
+  - name: Publish animations
     uses: crazy-max/ghaction-github-pages@v4
     with:
       build_dir: dist
       target_branch: output
       commit_message: "chore: update contribution animations"
-
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
